@@ -163,16 +163,10 @@ export default function RouteOptimization() {
 
       {/* Empty State */}
       {!showResults && (
-        <div className="animate-fade-in-up delay-2" style={{ textAlign: 'center', padding: 'var(--space-10) var(--space-6)' }}>
-          <div style={{ fontSize: '64px', marginBottom: 'var(--space-4)', animation: 'float 3s ease-in-out infinite' }}>
-            🗺️
-          </div>
-          <h3 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--space-2)' }}>
-            Plan Your Journey
-          </h3>
-          <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-secondary)', maxWidth: '280px', margin: '0 auto' }}>
-            Enter your source and destination to get AI-optimized route suggestions with safety scores.
-          </p>
+        <div className="routes-empty animate-fade-in-up delay-2">
+          <div className="routes-empty-icon">🗺️</div>
+          <h3>Plan Your Journey</h3>
+          <p>Enter your source and destination to get AI-optimized route suggestions with safety scores.</p>
         </div>
       )}
     </div>

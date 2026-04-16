@@ -54,7 +54,7 @@ export default function Safety() {
       )}
 
       {/* SOS Section */}
-      <div className="sos-section animate-scale-in delay-1">
+      <div className="sos-section">
         <div className="sos-button-wrapper">
           <div className="sos-ripple-1" />
           <div className="sos-ripple-2" />
@@ -93,7 +93,7 @@ export default function Safety() {
       )}
 
       {/* Live Location Sharing */}
-      <div className="location-sharing-card animate-fade-in-up delay-2">
+      <div className="location-sharing-card">
         <div className="sharing-header">
           <h3>
             <MapPin size={16} />
@@ -116,7 +116,7 @@ export default function Safety() {
       </div>
 
       {/* Emergency Contacts */}
-      <div className="contacts-section animate-fade-in-up delay-3">
+      <div className="contacts-section">
         <div className="contacts-header">
           <h3>Emergency Contacts</h3>
           <button className="add-contact-btn" onClick={() => setShowAddModal(true)} id="add-contact-btn">

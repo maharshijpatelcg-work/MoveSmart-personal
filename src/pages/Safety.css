@@ -1,10 +1,12 @@
-/* Safety / SOS Styles */
+/* ============================================
+   Safety / SOS — Enhanced v2.0
+   ============================================ */
 .safety-page {
   background: var(--gradient-surface);
 }
 
 .safety-header {
-  padding: var(--space-5) var(--space-4) var(--space-4);
+  padding: max(var(--space-5), env(safe-area-inset-top, 20px)) var(--space-4) var(--space-4);
 }
 
 .safety-header h1 {
@@ -24,12 +26,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-6) var(--space-4);
+  padding: var(--space-4) var(--space-4) var(--space-6);
 }
 
 .sos-button-wrapper {
   position: relative;
   margin-bottom: var(--space-4);
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sos-ripple-1,
@@ -41,19 +48,20 @@
   border: 2px solid var(--danger-red);
   opacity: 0;
   animation: sosRipple 3s ease-out infinite;
+  pointer-events: none;
 }
 
 .sos-ripple-2 { animation-delay: 1s; }
 .sos-ripple-3 { animation-delay: 2s; }
 
 @keyframes sosRipple {
-  0% { transform: scale(1); opacity: 0.4; }
-  100% { transform: scale(2.2); opacity: 0; }
+  0% { transform: scale(0.85); opacity: 0.5; }
+  100% { transform: scale(2); opacity: 0; }
 }
 
 .sos-button {
-  width: 140px;
-  height: 140px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   background: var(--gradient-danger);
   color: white;
@@ -65,24 +73,28 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
-  box-shadow: 0 8px 32px rgba(255, 23, 68, 0.4);
+  box-shadow:
+    0 8px 32px rgba(255, 23, 68, 0.4),
+    0 0 60px rgba(255, 23, 68, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: all var(--transition-base);
   position: relative;
   z-index: 2;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sos-button:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
   box-shadow: 0 12px 40px rgba(255, 23, 68, 0.5);
 }
 
 .sos-button:active {
-  transform: scale(0.95);
+  transform: scale(0.94);
 }
 
 .sos-button .sos-icon {
-  font-size: 36px;
+  font-size: 32px;
 }
 
 .sos-button .sos-text {
@@ -95,6 +107,7 @@
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
   text-align: center;
+  max-width: 260px;
 }
 
 /* SOS Activated */
@@ -102,9 +115,9 @@
   margin: 0 var(--space-4) var(--space-4);
   padding: var(--space-4);
   background: var(--danger-red-light);
-  border: 1px solid var(--danger-red);
+  border: 1.5px solid var(--danger-red);
   border-radius: var(--radius-md);
-  animation: fadeInUp 0.3s ease;
+  animation: slideUpFade 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .sos-activated-header {
@@ -121,16 +134,24 @@
   font-size: var(--font-size-sm);
   color: var(--text-primary);
   margin-bottom: var(--space-3);
+  line-height: 1.5;
 }
 
 .sos-cancel-btn {
   padding: var(--space-2) var(--space-4);
   border: 1.5px solid var(--danger-red);
   border-radius: var(--radius-sm);
-  background: white;
+  background: var(--surface);
   color: var(--danger-red);
   font-weight: 600;
   font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sos-cancel-btn:active {
+  background: var(--danger-red-light);
+  transform: scale(0.97);
 }
 
 /* Location Sharing */
@@ -162,7 +183,7 @@
 .sharing-description {
   font-size: var(--font-size-xs);
   color: var(--text-secondary);
-  margin-bottom: var(--space-3);
+  line-height: 1.5;
 }
 
 /* Toggle Switch */
@@ -175,6 +196,8 @@
   cursor: pointer;
   transition: background var(--transition-base);
   border: none;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .toggle-switch.active {
@@ -189,8 +212,8 @@
   height: 20px;
   border-radius: 50%;
   background: white;
-  box-shadow: var(--shadow-xs);
-  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .toggle-switch.active .toggle-knob {
@@ -200,6 +223,7 @@
 /* Emergency Contacts */
 .contacts-section {
   padding: 0 var(--space-4);
+  padding-bottom: var(--space-4);
 }
 
 .contacts-header {
@@ -225,6 +249,12 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  transition: all var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.add-contact-btn:active {
+  transform: scale(0.95);
 }
 
 .contact-card {
@@ -236,6 +266,7 @@
   border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
   margin-bottom: var(--space-2);
+  transition: all var(--transition-fast);
 }
 
 .contact-avatar {
@@ -254,6 +285,7 @@
 
 .contact-info {
   flex: 1;
+  min-width: 0;
 }
 
 .contact-info h4 {
@@ -265,6 +297,9 @@
 .contact-info p {
   font-size: var(--font-size-xs);
   color: var(--text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .contact-remove {
@@ -277,6 +312,12 @@
   justify-content: center;
   color: var(--danger-red);
   transition: all var(--transition-fast);
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contact-remove:active {
+  transform: scale(0.9);
 }
 
 /* Night Mode Banner */
@@ -289,10 +330,25 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  animation: slideUpFade 0.4s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.night-mode-banner::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 179, 0, 0.08);
 }
 
 .night-icon {
   font-size: 28px;
+  flex-shrink: 0;
 }
 
 .night-info h4 {
@@ -311,6 +367,8 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: var(--z-modal);
   display: flex;
   align-items: flex-end;
@@ -324,7 +382,8 @@
   background: var(--surface);
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   padding: var(--space-6);
-  animation: slideInUp 0.3s ease;
+  padding-bottom: max(var(--space-6), calc(env(safe-area-inset-bottom, 0px) + var(--space-4)));
+  animation: slideUpFade 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .modal-content h3 {
@@ -341,4 +400,23 @@
 
 .modal-actions .btn {
   flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 359px) {
+  .sos-button {
+    width: 110px;
+    height: 110px;
+    font-size: var(--font-size-xl);
+  }
+  .sos-button .sos-icon {
+    font-size: 26px;
+  }
+  .sos-button-wrapper {
+    width: 140px;
+    height: 140px;
+  }
+  .modal-content {
+    padding: var(--space-4);
+  }
 }

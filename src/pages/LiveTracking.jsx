@@ -102,8 +102,7 @@ export default function LiveTracking() {
 
         {/* Share button */}
         <button
-          className="btn btn-outline btn-full"
-          style={{ marginTop: 'var(--space-4)', gap: '8px' }}
+          className="btn btn-outline btn-full tracking-share-btn"
           onClick={() => {}}
         >
           <Share2 size={16} /> Share Live Location

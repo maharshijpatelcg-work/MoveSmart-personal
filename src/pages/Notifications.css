@@ -1,10 +1,12 @@
-/* Notifications Styles */
+/* ============================================
+   Notifications — Enhanced v2.0
+   ============================================ */
 .notif-page {
   background: var(--gradient-surface);
 }
 
 .notif-header {
-  padding: var(--space-5) var(--space-4) var(--space-3);
+  padding: max(var(--space-5), env(safe-area-inset-top, 20px)) var(--space-4) var(--space-3);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,8 +22,15 @@
   font-size: var(--font-size-xs);
   font-weight: 600;
   color: var(--danger-red);
-  background: none;
+  background: var(--danger-red-light);
   padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.clear-all-btn:active {
+  transform: scale(0.95);
 }
 
 /* Filter tabs */
@@ -31,6 +40,7 @@
   padding: var(--space-2) var(--space-4) var(--space-4);
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .notif-filters::-webkit-scrollbar {
@@ -46,13 +56,20 @@
   background: var(--surface);
   color: var(--text-secondary);
   border: 1px solid var(--border-light);
-  transition: all var(--transition-fast);
+  transition: all var(--transition-base);
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
 }
 
 .notif-filter.active {
   background: var(--primary);
   color: white;
   border-color: var(--primary);
+  box-shadow: var(--shadow-primary);
+}
+
+.notif-filter:active {
+  transform: scale(0.95);
 }
 
 /* Notification items */
@@ -61,6 +78,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  padding-bottom: var(--space-4);
 }
 
 .notif-item {
@@ -73,15 +91,16 @@
   transition: all var(--transition-base);
   cursor: pointer;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .notif-item:active {
-  transform: scale(0.99);
+  transform: scale(0.98);
 }
 
 .notif-item.unread {
   background: var(--primary-light);
-  border-color: var(--primary-50);
+  border-color: rgba(26, 115, 232, 0.15);
 }
 
 .notif-item.unread::after {
@@ -93,6 +112,7 @@
   height: 8px;
   border-radius: 50%;
   background: var(--primary);
+  animation: pulseSoft 2s ease-in-out infinite;
 }
 
 .notif-icon {
@@ -144,6 +164,7 @@
 .notif-empty-icon {
   font-size: 56px;
   margin-bottom: var(--space-4);
+  animation: float 3s ease-in-out infinite;
 }
 
 .notif-empty h3 {
@@ -156,4 +177,16 @@
 .notif-empty p {
   font-size: var(--font-size-sm);
   color: var(--text-tertiary);
+}
+
+/* Responsive */
+@media (max-width: 359px) {
+  .notif-item {
+    padding: var(--space-3);
+  }
+  .notif-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
 }

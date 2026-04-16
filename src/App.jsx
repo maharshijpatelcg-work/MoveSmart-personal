@@ -13,18 +13,22 @@ import Profile from './pages/Profile';
 import BottomNav from './components/BottomNav';
 import AIChatbot from './components/AIChatbot';
 
+import CrazyTransition from './components/CrazyTransition';
+
 function ProtectedLayout() {
   return (
     <>
-      <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/tracking" element={<LiveTracking />} />
-        <Route path="/routes" element={<RouteOptimization />} />
-        <Route path="/safety" element={<Safety />} />
-        <Route path="/notifications" element={<Notifications />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
-      </Routes>
+      <CrazyTransition>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tracking" element={<LiveTracking />} />
+          <Route path="/routes" element={<RouteOptimization />} />
+          <Route path="/safety" element={<Safety />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </CrazyTransition>
       <BottomNav />
       <AIChatbot />
     </>

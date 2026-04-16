@@ -34,12 +34,12 @@ const useStore = create((set, get) => ({
   },
 
   // --- Theme ---
-  darkMode: JSON.parse(localStorage.getItem('ms_dark') || 'false'),
+  darkMode: true, // Forced deep black theme
   toggleDarkMode: () => {
     const newVal = !get().darkMode;
-    localStorage.setItem('ms_dark', JSON.stringify(newVal));
-    document.documentElement.setAttribute('data-theme', newVal ? 'dark' : 'light');
-    set({ darkMode: newVal });
+    localStorage.setItem('ms_dark', JSON.stringify(true)); // Always keep it true for this effect
+    document.documentElement.setAttribute('data-theme', newVal ? 'dark' : 'dark');
+    set({ darkMode: true });
   },
 
   // --- Notifications ---

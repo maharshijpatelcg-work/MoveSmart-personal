@@ -1,0 +1,67 @@
+/* ============================================
+   Smooth Transitions — Premium UI Feel
+   ============================================ */
+
+.crazy-page-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--bg-page);
+}
+
+.crazy-page-content {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform, opacity, filter;
+  transform-origin: center center;
+}
+
+/* 
+  Elegant Scale & Fade Transition
+*/
+
+.smooth-exit .crazy-page-content {
+  animation: smoothFadeOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.smooth-enter .crazy-page-content {
+  animation: smoothFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes smoothFadeOut {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    transform: scale(0.96) translateY(-10px);
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+@keyframes smoothFadeIn {
+  0% {
+    transform: scale(1.04) translateY(20px);
+    opacity: 0;
+    filter: blur(8px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+/* Ensure backgrounds don't bleed during transition */
+.transition-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-page);
+  z-index: -1;
+}

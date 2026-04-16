@@ -1,0 +1,105 @@
+/* Onboarding Styles */
+.onboarding {
+  position: fixed;
+  inset: 0;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  z-index: 90;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.onboarding-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-4) var(--space-5);
+}
+
+.skip-btn {
+  background: none;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-3);
+}
+
+.onboarding-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+}
+
+.onboarding-illustration {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  margin-bottom: var(--space-8);
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+}
+
+.onboarding-illustration::after {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px dashed currentColor;
+  opacity: 0.15;
+  animation: spin 15s linear infinite;
+}
+
+.onboarding-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.02em;
+}
+
+.onboarding-description {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 320px;
+}
+
+/* Dots */
+.onboarding-dots {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+  padding: var(--space-6) 0;
+}
+
+.onboarding-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--border-medium);
+  transition: all var(--transition-base);
+}
+
+.onboarding-dot.active {
+  width: 28px;
+  background: var(--primary);
+}
+
+/* Bottom Actions */
+.onboarding-actions {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6) var(--space-8);
+}
+
+.onboarding-actions .btn {
+  flex: 1;
+}

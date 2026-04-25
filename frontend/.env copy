@@ -1,0 +1,10 @@
+# MoveSmart Backend API URL
+VITE_API_URL=http://localhost:5000/api
+
+# MoveSmart API Keys
+# Get your Gemini API key from: https://aistudio.google.com/apikey
+VITE_GEMINI_API_KEY=
+
+# Get your Google Maps API key from: https://console.cloud.google.com
+# Enable: Maps JavaScript API, Places API, Directions API
+VITE_GOOGLE_MAPS_KEY=

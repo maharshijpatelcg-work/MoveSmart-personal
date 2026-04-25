@@ -1,0 +1,149 @@
+/* ═══ School Bus Page ═══ */
+.schoolbus-page{padding:2rem 2rem 4rem;max-width:1300px;margin:0 auto}
+.schoolbus-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.schoolbus-header h1{font-size:var(--fs-h2);font-weight:800;display:flex;align-items:center;gap:.5rem}
+.schoolbus-header p{color:var(--text-muted);margin-top:.3rem}
+.schoolbus-header__stats{display:flex;gap:1rem}
+.sb-stat{text-align:center;padding:.75rem 1.25rem;background:var(--surface-card);border:1px solid var(--glass-border);border-radius:var(--radius-sm)}
+.sb-stat__num{display:block;font-size:1.25rem;font-weight:800;color:#F59E0B}
+.sb-stat span{font-size:var(--fs-xs);color:var(--text-muted)}
+.schoolbus-tabs{display:flex;gap:6px;margin-bottom:1.5rem}
+.sb-tab{padding:8px 18px;font-size:var(--fs-sm);font-weight:600;background:var(--glass);border:1px solid var(--glass-border);border-radius:100px;color:var(--text-muted);cursor:pointer;font-family:var(--ff);transition:var(--transition)}
+.sb-tab.active{background:#F59E0B;color:#000;border-color:#F59E0B}
+.schoolbus-track{display:grid;grid-template-columns:1fr 360px;gap:var(--gap)}
+.schoolbus-map-container{border-radius:var(--radius);overflow:hidden;border:1px solid var(--glass-border);min-height:450px}
+.schoolbus-map{height:100%;min-height:450px}
+.schoolbus-cards{display:flex;flex-direction:column;gap:10px;max-height:500px;overflow-y:auto}
+.sb-card{padding:1rem;background:var(--surface-card);border:1px solid var(--glass-border);border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition)}
+.sb-card:hover,.sb-card.selected{border-color:#F59E0B;background:rgba(245,158,11,.05)}
+.sb-card__top{display:flex;align-items:center;gap:8px;margin-bottom:.5rem}
+.sb-card__icon{font-size:1.4rem}
+.sb-card__info{flex:1}
+.sb-card__info strong{display:block;font-size:var(--fs-sm);font-weight:600}
+.sb-card__info span{font-size:var(--fs-xs);color:var(--text-muted)}
+.sb-card__badge{font-size:10px;font-weight:700;text-transform:uppercase;padding:2px 8px;border-radius:100px}
+.sb-card__badge--on-time{color:#00E676;background:rgba(0,230,118,.1)}
+.sb-card__badge--delayed{color:#FF5252;background:rgba(255,82,82,.1)}
+.sb-card__meta{display:flex;gap:12px;font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:.5rem}
+.sb-card__meta span{display:flex;align-items:center;gap:3px}
+.sb-card__driver{display:flex;align-items:center;justify-content:space-between;font-size:var(--fs-xs);color:var(--text-muted);padding-top:.5rem;border-top:1px solid var(--glass-border)}
+.sb-card__call{width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(0,230,118,.1);border-radius:50%;color:#00E676;transition:var(--transition)}
+.sb-card__call:hover{background:rgba(0,230,118,.2)}
+
+/* Schedule */
+.schoolbus-schedule{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:var(--gap)}
+.sb-schedule-card{padding:1.5rem;background:var(--surface-card);border:1px solid var(--glass-border);border-radius:var(--radius)}
+.sb-schedule-card__header{margin-bottom:1rem}
+.sb-schedule-card__header h3{font-size:var(--fs-body);font-weight:700}
+.sb-schedule-card__header span{font-size:var(--fs-xs);color:var(--text-muted)}
+.sb-schedule-card__times{display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--glass);border-radius:var(--radius-xs);margin-bottom:1rem}
+.sb-schedule-card__times div{flex:1;text-align:center}
+.sb-schedule-label{display:block;font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:2px}
+.sb-schedule-card__stops{display:flex;flex-direction:column;gap:0}
+.sb-stop{display:flex;align-items:center;gap:10px;padding:6px 0;padding-left:12px;border-left:2px solid var(--glass-border);position:relative;font-size:var(--fs-sm);color:var(--text-muted)}
+.sb-stop--passed{border-left-color:#F59E0B;color:var(--text)}
+.sb-stop__dot{position:absolute;left:-5px;width:8px;height:8px;border-radius:50%;background:var(--glass-border)}
+.sb-stop--passed .sb-stop__dot{background:#F59E0B}
+.sb-stop__current{font-size:10px;font-weight:700;color:#F59E0B;background:rgba(245,158,11,.1);padding:1px 6px;border-radius:100px;margin-left:auto}
+
+/* Students */
+.schoolbus-students{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:var(--gap)}
+.sb-students-card{padding:1.5rem;background:var(--surface-card);border:1px solid var(--glass-border);border-radius:var(--radius)}
+.sb-students-card h3{font-size:var(--fs-sm);font-weight:700;margin-bottom:1rem}
+.sb-students-list{display:flex;flex-direction:column;gap:6px}
+.sb-student{display:flex;align-items:center;gap:10px;padding:8px;background:var(--glass);border-radius:var(--radius-xs)}
+.sb-student__avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--fs-xs);flex-shrink:0}
+.sb-student__info{flex:1}
+.sb-student__info strong{display:block;font-size:var(--fs-sm)}
+.sb-student__info span{font-size:var(--fs-xs);color:var(--text-muted)}
+.sb-student__status{font-size:10px;font-weight:600;display:flex;align-items:center;gap:3px;padding:2px 8px;border-radius:100px;color:var(--text-muted);background:var(--glass)}
+.sb-student__status.checked{color:#00E676;background:rgba(0,230,118,.1)}
+
+/* ═══ Traffic Page ═══ */
+.traffic-page{padding:2rem 2rem 4rem;max-width:1300px;margin:0 auto}
+.traffic-header{margin-bottom:1.5rem}
+.traffic-header h1{font-size:var(--fs-h2);font-weight:800;display:flex;align-items:center;gap:.5rem}
+.traffic-header p{color:var(--text-muted);margin-top:.3rem}
+.traffic-layout{display:grid;grid-template-columns:340px 1fr;gap:var(--gap)}
+.traffic-controls{display:flex;flex-direction:column;gap:1rem}
+.traffic-form{padding:1.5rem;background:var(--surface-card);border:1px solid var(--glass-border);border-radius:var(--radius)}
+.traffic-toggle{display:flex;align-items:center;justify-content:space-between;padding:1rem;background:var(--surface-card);border:1px solid var(--glass-border);border-radius:var(--radius-sm);font-size:var(--fs-sm);font-weight:500}
+.traffic-recent{padding:1rem;background:var(--surface-card);border:1px solid var(--glass-border);border-radius:var(--radius)}
+.traffic-recent h4{font-size:var(--fs-sm);font-weight:700;margin-bottom:.75rem}
+.traffic-recent__item{display:flex;align-items:flex-start;gap:8px;width:100%;padding:8px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-xs);cursor:pointer;font-family:var(--ff);color:var(--text-muted);text-align:left;margin-bottom:6px;transition:var(--transition);font-size:var(--fs-xs)}
+.traffic-recent__item:hover{border-color:var(--primary);color:var(--text)}
+.traffic-recent__item div{display:flex;flex-direction:column;gap:1px}
+.traffic-map-container{border-radius:var(--radius);overflow:hidden;border:1px solid var(--glass-border);min-height:500px}
+.traffic-gmap{width:100%;height:100%;min-height:500px}
+.traffic-route-info{position:absolute;bottom:16px;left:16px;right:16px;z-index:10;padding:1rem;background:rgba(15,25,35,.92);backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:var(--radius-sm)}
+.traffic-route-info__row{display:flex;align-items:center;gap:6px;font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:4px}
+.traffic-route-info__stats{display:flex;gap:1rem;margin-top:8px;padding-top:8px;border-top:1px solid var(--glass-border)}
+.traffic-route-info__stats div{display:flex;align-items:center;gap:4px;font-size:var(--fs-xs);color:var(--text-muted)}
+.traffic-route-info__stats strong{color:var(--text)}
+.traffic-alt-note{font-size:var(--fs-xs);color:var(--warning);margin-top:6px;display:flex;align-items:center;gap:4px}
+
+/* No API Key fallback */
+.traffic-no-key{text-align:center;padding:3rem;background:var(--surface-card);border:1px solid var(--glass-border);border-radius:var(--radius)}
+.traffic-no-key__icon{font-size:4rem;margin-bottom:1rem}
+.traffic-no-key h2{font-size:var(--fs-h3);font-weight:700;margin-bottom:.5rem}
+.traffic-no-key>p{color:var(--text-muted);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+.traffic-no-key__steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem;text-align:left}
+.traffic-no-key__step{display:flex;gap:12px;padding:1rem;background:var(--glass);border-radius:var(--radius-xs)}
+.traffic-no-key__step>span{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--fs-sm);flex-shrink:0}
+.traffic-no-key__step strong{display:block;font-size:var(--fs-sm);font-weight:600;margin-bottom:2px}
+.traffic-no-key__step p,.traffic-no-key__step code{font-size:var(--fs-xs);color:var(--text-muted)}
+.traffic-no-key__step code{background:var(--surface);padding:2px 6px;border-radius:4px;font-size:11px}
+.traffic-demo-features{margin-top:1.5rem}
+.traffic-demo-features h3{font-size:var(--fs-sm);font-weight:700;margin-bottom:1rem}
+.traffic-demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem}
+.traffic-demo-card{display:flex;align-items:center;gap:8px;padding:.75rem 1rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-xs);font-size:var(--fs-sm);color:var(--text-muted)}
+
+/* ═══ Women Safety Page ═══ */
+.wsafety-page{padding:2rem 2rem 4rem;max-width:1200px;margin:0 auto}
+.wsafety-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+.wsafety-header h1{font-size:var(--fs-h2);font-weight:800;display:flex;align-items:center;gap:.5rem}
+.wsafety-header p{color:var(--text-muted);margin-top:.3rem}
+.wsafety-score{position:relative;width:64px;height:64px}
+.wsafety-score__ring{width:100%;height:100%}
+.wsafety-score__val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800}
+.wsafety-tip{display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:var(--radius-sm);font-size:var(--fs-sm);color:var(--text-muted);margin-bottom:1.5rem}
+.wsafety-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--gap)}
+.wsafety-card{padding:1.5rem;background:var(--surface-card);border:1px solid var(--glass-border);border-radius:var(--radius);backdrop-filter:blur(12px)}
+.wsafety-card h2{font-size:var(--fs-body);font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:.25rem}
+.wsafety-card>p{font-size:var(--fs-sm);color:var(--text-muted);margin-bottom:.75rem}
+.wsafety-card--sos{border-color:rgba(255,82,82,.15)}
+.wsafety-card--sos.sos-active{border-color:rgba(255,82,82,.4);box-shadow:0 0 30px rgba(255,82,82,.1)}
+.fake-call-active{display:flex;align-items:center;justify-content:space-between;padding:1rem;background:rgba(0,230,118,.05);border-radius:var(--radius-xs);margin-top:.5rem}
+.fake-call-active__info{display:flex;align-items:center;gap:10px}
+.fake-call-active__avatar{font-size:1.5rem}
+.fake-call-active__info strong{display:block;font-size:var(--fs-sm)}
+.fake-call-active__info span{font-size:var(--fs-xs);color:var(--text-muted)}
+.safe-walk-active{text-align:center;padding:.5rem 0}
+.safe-walk-active__timer{font-size:2rem;font-weight:800;font-variant-numeric:tabular-nums;margin-bottom:.5rem}
+.safe-walk-active__timer span{font-size:var(--fs-sm);color:var(--text-muted);font-weight:400}
+.safe-walk-active__bar{height:4px;background:var(--surface-3);border-radius:2px;overflow:hidden;margin-bottom:1rem}
+.safe-walk-active__bar div{height:100%;background:linear-gradient(90deg,#00E676,#FFB74D,#FF5252);border-radius:2px;transition:width .5s}
+.safe-walk-presets{display:flex;gap:6px;margin-bottom:.5rem}
+.safe-walk-preset{flex:1;padding:6px;font-size:var(--fs-xs);font-weight:600;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-xs);color:var(--text-muted);cursor:pointer;font-family:var(--ff);transition:var(--transition)}
+.safe-walk-preset.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+@media(max-width:1024px){
+.traffic-layout{grid-template-columns:1fr}
+.traffic-map-container{min-height:50vh}
+.traffic-gmap{min-height:50vh}
+}
+
+@media(max-width:768px){
+.schoolbus-track{grid-template-columns:1fr}
+.schoolbus-cards{max-height:none}
+.schoolbus-header{flex-direction:column}
+.schoolbus-header__stats{flex-wrap:wrap}
+.wsafety-header{flex-direction:column;align-items:flex-start}
+}
+
+@media(max-width:480px){
+.schoolbus-schedule{grid-template-columns:1fr}
+.schoolbus-students{grid-template-columns:1fr}
+.wsafety-grid{grid-template-columns:1fr}
+.traffic-no-key__steps{grid-template-columns:1fr}
+}

@@ -1,0 +1,16 @@
+{
+  "name": "MoveSmart — Smart Urban Mobility",
+  "short_name": "MoveSmart",
+  "description": "Next-generation urban mobility platform with real-time tracking, intelligent routing, school bus monitoring, women safety, and AI-powered face verification.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F1923",
+  "theme_color": "#1A73E8",
+  "orientation": "portrait-primary",
+  "categories": ["transportation", "navigation", "safety"],
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "lang": "en-IN",
+  "dir": "ltr"
+}

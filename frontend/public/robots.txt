@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /settings
+
+Sitemap: https://movesmart.app/sitemap.xml
+
+# MoveSmart — Smart Urban Mobility Platform

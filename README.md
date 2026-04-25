@@ -11,14 +11,14 @@
 <h1 align="center">🚀 MoveSmart</h1>
 <p align="center"><b>Smart • Safe • Scalable Urban Mobility</b></p>
 
-<p align="center">
+<!-- <p align="center">
   <img src="https://img.shields.io/github/stars/your-username/movesmart?style=for-the-badge&color=yellow" />
   <img src="https://img.shields.io/github/forks/your-username/movesmart?style=for-the-badge&color=blue" />
   <img src="https://img.shields.io/github/issues/your-username/movesmart?style=for-the-badge&color=red" />
   <img src="https://img.shields.io/github/contributors/your-username/movesmart?style=for-the-badge&color=green" />
   <img src="https://img.shields.io/github/actions/workflow/status/your-username/movesmart/main.yml?style=for-the-badge&label=build" />
   <img src="https://img.shields.io/github/last-commit/your-username/movesmart?style=for-the-badge" />
-</p>
+</p> -->
 
 ---
 

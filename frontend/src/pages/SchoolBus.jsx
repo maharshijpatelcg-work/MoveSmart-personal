@@ -2,27 +2,47 @@
 // Features: Real-time school bus tracking, parent visibility, child check-in/out,
 // driver profiles, route schedules, delay notifications
 import { useState, useEffect, useRef, useMemo } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Polyline, Circle } from 'react-leaflet';
-import L from 'leaflet';
+import { APIProvider, Map, AdvancedMarker, InfoWindow, useMap } from '@vis.gl/react-google-maps';
 import { Bus, GraduationCap, Clock, MapPin, Phone, Star, Bell, CheckCircle, AlertTriangle, Users, ChevronRight, Shield } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-// School bus icon
-const schoolBusIcon = (status) => L.divIcon({
-  className: 'vehicle-marker-wrapper',
-  html: `<div class="vehicle-marker" style="--marker-bg:#F59E0B;--status-color:${status === 'on-time' ? '#00E676' : '#FF5252'}">
-    <div class="vehicle-marker__pulse"></div>
-    <div class="vehicle-marker__icon">🚌</div>
-    <div class="vehicle-marker__status"></div>
-  </div>`,
-  iconSize: [44, 44], iconAnchor: [22, 22], popupAnchor: [0, -22],
-});
+const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
 
-const stopIcon = L.divIcon({
-  className: 'vehicle-marker-wrapper',
-  html: `<div style="width:16px;height:16px;border-radius:50%;background:#F59E0B;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)"></div>`,
-  iconSize: [16, 16], iconAnchor: [8, 8],
-});
+function MapPolyline({ path, color }) {
+  const map = useMap();
+  const polylineRef = useRef(null);
+
+  useEffect(() => {
+    if (!map) return;
+    if (!polylineRef.current) {
+      polylineRef.current = new google.maps.Polyline({
+        path,
+        geodesic: true,
+        strokeColor: color,
+        strokeOpacity: 0.5,
+        strokeWeight: 3,
+        icons: [{
+          icon: { path: 'M 0,-1 0,1', strokeOpacity: 1, scale: 4 },
+          offset: '0',
+          repeat: '20px'
+        }]
+      });
+    } else {
+      polylineRef.current.setOptions({ path, strokeColor: color });
+    }
+    polylineRef.current.setMap(map);
+
+    return () => {
+      if (polylineRef.current) {
+        polylineRef.current.setMap(null);
+      }
+    };
+  }, [map, path, color]);
+
+  return null;
+}
+
+// Map Icons Configuration Handled Inline in Google Maps
 
 const SCHOOL_BUSES = [
   {
@@ -138,35 +158,58 @@ export default function SchoolBus() {
       {activeTab === 'track' && (
         <div className="schoolbus-track animate-in">
           <div className="schoolbus-map-container">
-            <MapContainer center={[23.030, 72.545]} zoom={13} className="schoolbus-map" zoomControl={false} attributionControl={false}>
-              <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
-              {buses.map(bus => (
-                <span key={bus.id}>
-                  <Polyline positions={bus.route.map(s => [s.lat, s.lng])} pathOptions={{ color: '#F59E0B', weight: 3, opacity: 0.4, dashArray: '8 6' }} />
-                  {bus.route.map((stop, i) => (
-                    <Marker key={`${bus.id}-stop-${i}`} position={[stop.lat, stop.lng]} icon={stopIcon}>
-                      <Popup><strong>{stop.name}</strong></Popup>
-                    </Marker>
-                  ))}
-                  <Marker position={[bus.position.lat, bus.position.lng]} icon={schoolBusIcon(bus.status)} eventHandlers={{ click: () => setSelectedBus(bus) }}>
-                    <Popup className="vehicle-popup" maxWidth={280}>
-                      <div className="vpopup">
-                        <div className="vpopup__header">
-                          <span className="vpopup__type">🚌</span>
-                          <div><h4 className="vpopup__name">{bus.name}</h4><p className="vpopup__route">{bus.school}</p></div>
-                          <span className={`vpopup__status vpopup__status--${bus.status}`}>{bus.status === 'on-time' ? 'On Time' : 'Delayed'}</span>
+            <APIProvider apiKey={API_KEY}>
+              <Map 
+                defaultCenter={{lat: 23.030, lng: 72.545}} 
+                defaultZoom={13} 
+                className="schoolbus-map" 
+                mapId="movesmart-schoolbus" 
+                disableDefaultUI={false} 
+                zoomControl={true} 
+                mapTypeControl={false} 
+                streetViewControl={false} 
+                fullscreenControl={false} 
+                gestureHandling="greedy"
+              >
+                {buses.map(bus => (
+                  <span key={bus.id}>
+                    <MapPolyline path={bus.route.map(s => ({ lat: s.lat, lng: s.lng }))} color="#F59E0B" />
+                    {bus.route.map((stop, i) => (
+                      <AdvancedMarker key={`${bus.id}-stop-${i}`} position={{ lat: stop.lat, lng: stop.lng }}>
+                        <div style={{width:'16px',height:'16px',borderRadius:'50%',background:'#F59E0B',border:'3px solid #fff',boxShadow:'0 2px 8px rgba(0,0,0,.3)'}}></div>
+                      </AdvancedMarker>
+                    ))}
+                    <AdvancedMarker position={bus.position} onClick={() => setSelectedBus(bus)}>
+                      <div className="vehicle-marker-wrapper" style={{ transform: 'translate(0, -50%)' }}>
+                        <div className="vehicle-marker" style={{ '--marker-bg': '#F59E0B', '--status-color': bus.status === 'on-time' ? '#00E676' : '#FF5252' }}>
+                          <div className="vehicle-marker__pulse"></div>
+                          <div className="vehicle-marker__icon">🚌</div>
+                          <div className="vehicle-marker__status"></div>
                         </div>
-                        <div className="vpopup__stats">
-                          <div className="vpopup__stat"><Clock size={14} /><span>ETA: {Math.round(bus.eta)} min</span></div>
-                          <div className="vpopup__stat"><Users size={14} /><span>{bus.occupied}/{bus.capacity}</span></div>
-                        </div>
-                        <div className="vpopup__driver"><span>{bus.driver.photo} {bus.driver.name}</span><span>⭐ {bus.driver.rating}</span></div>
                       </div>
-                    </Popup>
-                  </Marker>
-                </span>
-              ))}
-            </MapContainer>
+                    </AdvancedMarker>
+                    {selectedBus && selectedBus.id === bus.id && (
+                      <InfoWindow position={bus.position} onCloseClick={() => setSelectedBus(null)} pixelOffset={[0, -22]} headerDisabled={true}>
+                        <div className="vpopup" style={{ color: '#0F1923', width: '280px', padding: '4px' }}>
+                          <div className="vpopup__header">
+                            <span className="vpopup__type">🚌</span>
+                            <div><h4 className="vpopup__name" style={{margin:0, fontSize:'16px'}}>{bus.name}</h4><p className="vpopup__route" style={{margin:0}}>{bus.school}</p></div>
+                            <span className={`vpopup__status vpopup__status--${bus.status}`}>{bus.status === 'on-time' ? 'On Time' : 'Delayed'}</span>
+                          </div>
+                          <div className="vpopup__stats" style={{display: 'flex', gap: '12px', marginTop:'8px'}}>
+                            <div className="vpopup__stat" style={{display: 'flex', alignItems: 'center', gap: '4px'}}><Clock size={14} /><span>ETA: {Math.round(bus.eta)} min</span></div>
+                            <div className="vpopup__stat" style={{display: 'flex', alignItems: 'center', gap: '4px'}}><Users size={14} /><span>{bus.occupied}/{bus.capacity}</span></div>
+                          </div>
+                          <div className="vpopup__driver" style={{display: 'flex', justifyContent: 'space-between', marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #eee'}}>
+                            <span>{bus.driver.photo} {bus.driver.name}</span><span>⭐ {bus.driver.rating}</span>
+                          </div>
+                        </div>
+                      </InfoWindow>
+                    )}
+                  </span>
+                ))}
+              </Map>
+            </APIProvider>
           </div>
 
           {/* Bus Cards */}
